@@ -255,10 +255,6 @@ These new fields need to be initialized.
 
 ^code init-parser-error (1 before, 1 after)
 
-And to display the errors, we need a standard header.
-
-^code compiler-include-stdlib (1 before, 2 after)
-
 There's one last parsing function, another old friend from jlox.
 
 ^code consume
@@ -360,8 +356,11 @@ To compile number literals, we store a pointer to the following function at the
 
 We assume the token for the number literal has already been consumed and is
 stored in `previous`. We take that lexeme and use the C standard library to
-convert it to a double value. Then we generate the code to load that value using
-this function:
+convert it to a double value, provided the standard header:
+
+^code compiler-include-stdlib (1 before, 2 after)
+
+Then we generate the code to load that value using this function:
 
 ^code emit-constant
 
